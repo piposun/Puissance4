@@ -1,0 +1,3 @@
+Regle_1 SI JoueurPion==X ET MaxPion>=4 ALORS JoueurGagnant==X
+Regle_2 SI Joueur==X ET JoueurGagnant==X ALORS Partie==1
+Regle_3 SI Joueur==X ET JoueurGagnant!=X ALORS Partie==0
