@@ -101,6 +101,18 @@ void initGrid(char grid[NB_COLUMN][NB_ROW]) {
       grid[width][height] = EMPTY;
     }
   }
+
+  /*grid[0][0] = YELLOW;
+  grid[1][0] = YELLOW;
+  grid[1][1] = YELLOW;
+  grid[2][0] = RED;
+  grid[2][1] = YELLOW;
+  grid[2][2] = YELLOW;
+
+  grid[3][0] = RED;
+  grid[3][1] = RED;
+  grid[3][2] = YELLOW;*/
+
 }
 
 void displayGrid(char grid[NB_COLUMN][NB_ROW]) {
@@ -134,8 +146,14 @@ void displayGrid(char grid[NB_COLUMN][NB_ROW]) {
 }
 
 int maxToken(char token, char grid[NB_COLUMN][NB_ROW]) {
-  int game[NB_COLUMN][NB_ROW] = {{1}};
+  int game[NB_COLUMN][NB_ROW];
   int row = 0, column = 0, max = 0;
+
+  for (row = 0; row < NB_ROW; row++) {
+    for (column = 0; column < NB_COLUMN; column++) {
+      game[column][row] = 1;
+    }
+  }
 
   // pour le horizontal
   for (row = 0; row < NB_ROW; row++) {
@@ -212,6 +230,21 @@ int maxToken(char token, char grid[NB_COLUMN][NB_ROW]) {
   return max;
 }
 
+void cancelMove(char grid[NB_COLUMN][NB_ROW], int column) {
+  column -= 1;
+
+  if (column < 0 || column >= NB_COLUMN) {
+    return;
+  }
+
+  for (int y = NB_ROW-1; y >= 0; y--) {
+    if (grid[column][y] != EMPTY) {
+      grid[column][y] = EMPTY;
+      break;
+    }
+  }
+}
+
 void play(int player, char grid[NB_COLUMN][NB_ROW], int column) {
   int freeRow = -1;
 
@@ -234,7 +267,7 @@ void play(int player, char grid[NB_COLUMN][NB_ROW], int column) {
   grid[column][freeRow] = (player == IA) ? YELLOW : RED;
 }
 
-int choose(int player, char grid[NB_COLUMN][NB_ROW]) {
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW]) {
   int col;
 
   switch (player) {
@@ -244,7 +277,7 @@ int choose(int player, char grid[NB_COLUMN][NB_ROW]) {
     } break;
     case IA:
     {
-      col = playerIA();
+      col = playerIA(list, grid);
     } break;
     default:
     break;
@@ -262,16 +295,18 @@ int main (int argc, char *argv[]) {
 
   list = initRules("TestRule.txt");
 
+  INFO("");
   initGrid(grid);
   displayGrid(grid);
 
   while (end == 0) {
     do {
-      move = choose(player, grid);
+      move = choose(player, list, grid);
     }while(checkMove(grid, move) == FALSE);
 
     play(player, grid, move);
     displayGrid(grid);
+    evalGrid(list, grid);
 
     nbMove++;
 
@@ -288,7 +323,11 @@ int main (int argc, char *argv[]) {
       end = 1;
     }
 
-    player = !player;
+    if (player == IA) {
+      player = PLAYER;
+    } else {
+      player = IA;
+    }
   }
 
   return 0;

@@ -11,7 +11,7 @@
 #define YELLOW 'o'
 
 #define PLAYER  1
-#define IA 0
+#define IA 2
 
 #define TRUE  1
 #define FALSE 0
@@ -23,6 +23,7 @@ void initGrid(char grid[NB_COLUMN][NB_ROW]);
 void displayGrid(char grid[NB_COLUMN][NB_ROW]);
 int maxToken(char token, char grid[NB_COLUMN][NB_ROW]);
 void play(int player, char grid[NB_COLUMN][NB_ROW], int column);
-int choose(int player, char grid[NB_COLUMN][NB_ROW]);
+void cancelMove(char grid[NB_COLUMN][NB_ROW], int column);
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW]);
 
 #endif /* HEADER_PUISSANCE4 */
