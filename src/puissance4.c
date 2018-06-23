@@ -15,7 +15,7 @@
 int main (int argc, char *argv[]) {
 
   /* Lexique des numéros de Joueur
-  1 à n : IA avec niveau de profondeur n
+  1 à n : IA avec niveau de profondeur n (1 à 6)
   0 : Humain sans sauvegarde
   */
 
@@ -153,18 +153,6 @@ void initGrid(char grid[NB_COLUMN][NB_ROW]) {
       grid[width][height] = EMPTY;
     }
   }
-
-  /*grid[0][0] = YELLOW;
-  grid[1][0] = YELLOW;
-  grid[1][1] = YELLOW;
-  grid[2][0] = RED;
-  grid[2][1] = YELLOW;
-  grid[2][2] = YELLOW;
-
-  grid[3][0] = RED;
-  grid[3][1] = RED;
-  grid[3][2] = YELLOW;*/
-
 }
 
 void displayGrid(char grid[NB_COLUMN][NB_ROW]) {

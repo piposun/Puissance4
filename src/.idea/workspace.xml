@@ -27,22 +27,12 @@
     <favorites_list name="src" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ia.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ia.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1559">
-              <caret line="462" column="33" selection-start-line="462" selection-start-column="33" selection-end-line="462" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="puissance4.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/puissance4.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="362" column="7" selection-start-line="362" selection-start-column="7" selection-end-line="362" selection-end-column="7" />
+            <state relative-caret-position="-745">
+              <caret line="394" column="42" selection-start-line="394" selection-start-column="42" selection-end-line="394" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -51,8 +41,18 @@
       <file leaf-file-name="ia.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ia.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
+            <state relative-caret-position="234">
+              <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="98" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expertSystem.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/expertSystem.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-152">
+              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -61,7 +61,7 @@
       <file leaf-file-name="menu.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menu.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="1224">
               <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
               <folding />
             </state>
@@ -81,8 +81,28 @@
       <file leaf-file-name="puissance4.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/puissance4.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="27" column="88" selection-start-line="27" selection-start-column="88" selection-end-line="27" selection-end-column="88" />
+            <state relative-caret-position="1998">
+              <caret line="111" column="48" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hypothesis.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hypothesis.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="25" column="54" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="puissance4.c" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/puissance4.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -99,8 +119,8 @@
         <option value="$PROJECT_DIR$/menu.c" />
         <option value="$PROJECT_DIR$/ia.c" />
         <option value="$PROJECT_DIR$/ia.h" />
-        <option value="$PROJECT_DIR$/puissance4.h" />
         <option value="$PROJECT_DIR$/puissance4.c" />
+        <option value="$PROJECT_DIR$/puissance4.h" />
       </list>
     </option>
   </component>
@@ -178,11 +198,12 @@
       <option name="presentableId" value="Default" />
       <updated>1529743678136</updated>
       <workItem from="1529743679768" duration="3622000" />
+      <workItem from="1529771536287" duration="6656000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3622000" />
+    <option name="totallyTimeSpent" value="10278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1922" height="928" extended-state="6" />
@@ -224,15 +245,15 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestRule.txt">
+    <entry file="file://$PROJECT_DIR$/ia.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="38" />
+        <state relative-caret-position="8316">
+          <caret line="462" column="33" selection-start-line="462" selection-start-column="33" selection-end-line="462" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enter.h">
+    <entry file="file://$PROJECT_DIR$/puissance4.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -240,10 +261,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enter.c">
+    <entry file="file://$PROJECT_DIR$/ia.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="87" column="7" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="7" />
+        <state relative-caret-position="126">
+          <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
           <folding />
         </state>
       </provider>
@@ -256,22 +285,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menu.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ia.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/puissance4.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
@@ -280,18 +293,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestRule.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enter.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1566">
+          <caret line="87" column="7" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expertSystem.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ia.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1559">
-          <caret line="462" column="33" selection-start-line="462" selection-start-column="33" selection-end-line="462" selection-end-column="33" />
+        <state relative-caret-position="-745">
+          <caret line="394" column="42" selection-start-line="394" selection-start-column="42" selection-end-line="394" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ia.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/puissance4.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1998">
+          <caret line="111" column="48" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hypothesis.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="54" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/puissance4.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="362" column="7" selection-start-line="362" selection-start-column="7" selection-end-line="362" selection-end-column="7" />
+        <state relative-caret-position="90">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
           <folding />
         </state>
       </provider>
