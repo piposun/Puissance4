@@ -220,7 +220,7 @@ void freeAllHypothesis(Hypothesis *hypo) {
 }
 
 void displayHypothesis(Hypothesis *hypo, char *string) {
-  // Preparation de l'affichage de l'hypothese. On decale le pointer du nombre de caractaire deja present
+  // Preparation de l'affichage de l'hypothese. On decale le pointer du nombre de caractere deja present
   sprintf(string + strlen(string), "%s%s%s", hypo->name, convOperatorChar(hypo->operator), hypo->value);
 }
 

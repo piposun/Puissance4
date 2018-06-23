@@ -43,9 +43,9 @@ Rule * initRules(char *path);
 Rule * createRule();
 
 /*! \fn Rule * decodeRule(char *line)
-    \brief Cette fonction decode la regle a partir d'une chaine de caractaire.
+    \brief Cette fonction decode la regle a partir d'une chaine de caractere.
 
-    \param line Chaine de caractaire contenant la regle.
+    \param line Chaine de caractere contenant la regle.
     \return Renvoie la regle.
 */
 Rule * decodeRule(char *line);
