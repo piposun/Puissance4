@@ -8,6 +8,58 @@
 #include "expertSystem.h"
 #include "rule.h"
 #include "hypothesis.h"
+#include "enter.h"
+#include "menu.h"
+
+//________________________________________________________________________________________________________
+int main (int argc, char *argv[]) {
+
+  /* Lexique des numéros de Joueur
+  1 à n : IA avec niveau de profondeur n
+  0 : Humain sans sauvegarde
+  */
+
+  int choiceMain = 0;
+  int choiceUnder = 0;
+  int choicePlayerA = 0; //Valeur par defaut écrit dans le menu
+  int choicePlayerB = 6; //Valeur par defaut écrit dans le menu
+
+  if(argc == 3){
+    choicePlayerA = atoi(argv[1]);
+    choicePlayerB = atoi(argv[2]);
+    choiceMain = 3; //Valeur par defaut pour lancer la partie
+  }
+
+  do{
+    if (argc != 4){
+      displayChoicePlayer( choicePlayerA, choicePlayerB);
+      menuMain(&choiceMain);
+    }
+    switch (choiceMain){
+
+      case 0:
+        printf("\nBye bye\n\n");
+            break;
+
+      case 1:
+        menuChoicePlayer(&choiceUnder, 'B');
+            selectPlayer(choiceUnder, &choicePlayerB);
+            break;
+
+      case 2:
+        launchGame(choicePlayerB);
+            break;
+
+      default :
+        INFO("\nChoix inexistant\n\n");
+            break;
+    }
+
+  }while (choiceMain != 0);
+
+  return 0;
+}
+//___________________________________________________________________________________________________
 
 int endGame(Rule *list, int score, int idPlayer, int idHuman) {
   Rule *list2 = NULL;
@@ -66,8 +118,8 @@ int endGame(Rule *list, int score, int idPlayer, int idHuman) {
 int playPlayer(char grid[NB_COLUMN][NB_ROW], int idPlayer) {
   int col = 0;
 
-  INFO("JOUEUR: %s - quelle column voulez vous jouer?", (idPlayer == PLAYER) ? "RED":"YELLOW");
-  scanf("%d", &col);
+  INFO("\nTapez 0 pour quitter.\nJOUEUR: %s - quelle column voulez vous jouer?", (idPlayer == PLAYER) ? "RED":"YELLOW");
+  enterInt(&col,0,7);
 
   return col;
 }
@@ -267,7 +319,7 @@ void play(int player, char grid[NB_COLUMN][NB_ROW], int column) {
   grid[column][freeRow] = (player == IA || player == PLAYER2) ? YELLOW : RED;
 }
 
-int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) {
   int col;
 
   switch (player) {
@@ -281,7 +333,7 @@ int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
     } break;
     case IA:
     {
-      col = playerIA(list, grid, nbMove);
+      col = playerIA(list, grid, nbMove, levelIA);
     } break;
     default:
     break;
@@ -290,8 +342,8 @@ int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
   return col;
 }
 
-int main (int argc, char *argv[]) {
-  int move = -1, nbMove = 0, end = 0, game = 0, player = PLAYER;
+int launchGame(int playerTypeB) {
+  int move = -1, nbMove = 0, end = 0, game = 0, player = PLAYER, levelIA = playerTypeB;
   char grid[NB_COLUMN][NB_ROW];
   Rule *list = NULL;
 
@@ -305,7 +357,10 @@ int main (int argc, char *argv[]) {
 
   while (end == 0) {
     do {
-      move = choose(player, list, grid,nbMove);
+      move = choose(player, list, grid,nbMove, levelIA);
+      if (move == 0){
+        return 1; //1 si partie annulée
+      }
     }while(checkMove(grid, move) == FALSE);
 
     play(player, grid, move);
@@ -326,10 +381,18 @@ int main (int argc, char *argv[]) {
       end = 1;
     }
 
-    if (player == IA) {
-      player = PLAYER;
+    if (playerTypeB != 0){
+      if (player == IA) {
+        player = PLAYER;
+      } else {
+        player = IA;
+      }
     } else {
-      player = IA;
+      if (player == PLAYER2) {
+        player = PLAYER;
+      } else {
+        player = PLAYER2;
+      }
     }
   }
 

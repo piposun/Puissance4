@@ -25,6 +25,7 @@ void displayGrid(char grid[NB_COLUMN][NB_ROW]);
 int maxToken(char token, char grid[NB_COLUMN][NB_ROW]);
 void play(int player, char grid[NB_COLUMN][NB_ROW], int column);
 void cancelMove(char grid[NB_COLUMN][NB_ROW], int column);
-int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove);
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA);
+int launchGame(int playerTypeB);
 
 #endif /* HEADER_PUISSANCE4 */

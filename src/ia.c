@@ -448,7 +448,7 @@ float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha,
   return alpha;
 }
 
-int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
+int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) {
 
   int col = 0;
   float bestScore = -1000000;
@@ -498,7 +498,7 @@ int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
     // On joue le coup
     play(IA, grid, column+1);
     // On recupere le score de l'algo de decision
-    float score = negamax(list, grid, PLAYER, -1000000, 1000000, 6, 2, 1, nbMove);
+    float score = negamax(list, grid, PLAYER, -1000000, 1000000, levelIA, 2, 1, nbMove);
     // On annule le coup
     cancelMove(grid, column+1);
 
