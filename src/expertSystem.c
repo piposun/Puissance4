@@ -12,7 +12,7 @@ int checkFact(char *value, OPERATOR operator, char *compare) {
 
   int result = 0;
 
-  // Conversion chaine de caractaire en entier
+  // Conversion chaine de caractere en entier
   i_value = atoi(value);
   i_compare = atoi(compare);
 
