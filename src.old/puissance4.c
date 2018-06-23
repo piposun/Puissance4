@@ -8,58 +8,6 @@
 #include "expertSystem.h"
 #include "rule.h"
 #include "hypothesis.h"
-#include "enter.h"
-#include "menu.h"
-
-//________________________________________________________________________________________________________
-int main (int argc, char *argv[]) {
-
-  /* Lexique des numéros de Joueur
-  1 à n : IA avec niveau de profondeur n
-  0 : Humain sans sauvegarde
-  */
-
-  int choiceMain = 0;
-  int choiceUnder = 0;
-  int choicePlayerA = 0; //Valeur par defaut écrit dans le menu
-  int choicePlayerB = 6; //Valeur par defaut écrit dans le menu
-
-  if(argc == 3){
-    choicePlayerA = atoi(argv[1]);
-    choicePlayerB = atoi(argv[2]);
-    choiceMain = 3; //Valeur par defaut pour lancer la partie
-  }
-
-  do{
-    if (argc != 4){
-      displayChoicePlayer( choicePlayerA, choicePlayerB);
-      menuMain(&choiceMain);
-    }
-    switch (choiceMain){
-
-      case 0:
-        printf("\nBye bye\n\n");
-            break;
-
-      case 1:
-        menuChoicePlayer(&choiceUnder, 'B');
-            selectPlayer(choiceUnder, &choicePlayerB);
-            break;
-
-      case 2:
-        launchGame(choicePlayerB);
-            break;
-
-      default :
-        INFO("\nChoix inexistant\n\n");
-            break;
-    }
-
-  }while (choiceMain != 0);
-
-  return 0;
-}
-//___________________________________________________________________________________________________
 
 int endGame(Rule *list, int score, int idPlayer, int idHuman) {
   Rule *list2 = NULL;
@@ -115,11 +63,11 @@ int endGame(Rule *list, int score, int idPlayer, int idHuman) {
   return result;
 }
 
-int playPlayer(char grid[NB_COLUMN][NB_ROW], int idPlayer) {
+int player1(char grid[NB_COLUMN][NB_ROW]) {
   int col = 0;
 
-  INFO("\nTapez 0 pour quitter.\nJOUEUR: %s - quelle column voulez vous jouer?", (idPlayer == PLAYER) ? "RED":"YELLOW");
-  enterInt(&col,0,7);
+  INFO("JOUEUR: RED - quelle column voulez vous jouer?");
+  scanf("%d", &col);
 
   return col;
 }
@@ -153,18 +101,6 @@ void initGrid(char grid[NB_COLUMN][NB_ROW]) {
       grid[width][height] = EMPTY;
     }
   }
-
-  /*grid[0][0] = YELLOW;
-  grid[1][0] = YELLOW;
-  grid[1][1] = YELLOW;
-  grid[2][0] = RED;
-  grid[2][1] = YELLOW;
-  grid[2][2] = YELLOW;
-
-  grid[3][0] = RED;
-  grid[3][1] = RED;
-  grid[3][2] = YELLOW;*/
-
 }
 
 void displayGrid(char grid[NB_COLUMN][NB_ROW]) {
@@ -316,24 +252,20 @@ void play(int player, char grid[NB_COLUMN][NB_ROW], int column) {
     return;
   }
 
-  grid[column][freeRow] = (player == IA || player == PLAYER2) ? YELLOW : RED;
+  grid[column][freeRow] = (player == IA) ? YELLOW : RED;
 }
 
-int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) {
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
   int col;
 
   switch (player) {
     case PLAYER:
     {
-      col = playPlayer(grid, player);
-    } break;
-    case PLAYER2:
-    {
-      col = playPlayer(grid, player);
+      col = player1(grid);
     } break;
     case IA:
     {
-      col = playerIA(list, grid, nbMove, levelIA);
+      col = playerIA(list, grid, nbMove);
     } break;
     default:
     break;
@@ -342,8 +274,8 @@ int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int
   return col;
 }
 
-int launchGame(int playerTypeB) {
-  int move = -1, nbMove = 0, end = 0, game = 0, player = PLAYER, levelIA = playerTypeB;
+int main (int argc, char *argv[]) {
+  int move = -1, nbMove = 0, end = 0, game = 0, player = PLAYER;
   char grid[NB_COLUMN][NB_ROW];
   Rule *list = NULL;
 
@@ -357,42 +289,31 @@ int launchGame(int playerTypeB) {
 
   while (end == 0) {
     do {
-      move = choose(player, list, grid,nbMove, levelIA);
-      if (move == 0){
-        return 1; //1 si partie annulée
-      }
+      move = choose(player, list, grid,nbMove);
     }while(checkMove(grid, move) == FALSE);
 
     play(player, grid, move);
     displayGrid(grid);
+    evalGrid(list, grid);
 
     nbMove++;
 
-    game = endGame(list, maxToken((player == IA || player == PLAYER2) ? YELLOW : RED, grid), player, PLAYER);
-
-    if (nbMove == NB_COLUMN*NB_ROW) {
+    game = endGame(list, maxToken(player == IA ? YELLOW : RED, grid), player, PLAYER);
+      if (nbMove == NB_COLUMN*NB_ROW) {
           INFO("Match NUL (%d coups)", nbMove);
           end = 1;
       } else if (game < 0) {
       INFO("La partie est PERDUE en %d coups", nbMove);
       end = 1;
     } else if (game > 0) {
-      INFO("La partie est GAGNEE en %d coups", nbMove);
-      end = 1;
-    }
+          INFO("La partie est GAGNEE en %d coups", nbMove);
+          end = 1;
+      }
 
-    if (playerTypeB != 0){
       if (player == IA) {
-        player = PLAYER;
-      } else {
-        player = IA;
-      }
+      player = PLAYER;
     } else {
-      if (player == PLAYER2) {
-        player = PLAYER;
-      } else {
-        player = PLAYER2;
-      }
+      player = IA;
     }
   }
 

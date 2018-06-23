@@ -44,13 +44,14 @@ void evalSerie(Rule *list, int idPlayer, char grid[NB_COLUMN][NB_ROW], int row, 
     // La case est inaccessible
     sprintf(string, "ColorCase==%d", -1);
   }
+
   fact = decodeHypothesis(string);
   if (fact != NULL) {
     listFact = addFact(listFact, fact);
   }
 
   // On verifie si on peut observer la case precedente dans le sens du mouvement
-  if ((row - moveR) >= 0 && (column - moveC) >= 0 && (row - moveR) < NB_ROW && (column - moveC) < NB_COLUMN) {
+  if ((row - moveR) >= 0 && (column - moveC) >= 0) {
     if (grid[column-moveC][row-moveR] != EMPTY) {
       // Si la case n'est pas vide on sauvegarde la couleur
       *lastColor = convColorToValue(grid[column-moveC][row-moveR]);
@@ -61,6 +62,7 @@ void evalSerie(Rule *list, int idPlayer, char grid[NB_COLUMN][NB_ROW], int row, 
   else {
     sprintf(string, "ColorAdjacente==%d", -10);
   }
+
   fact = decodeHypothesis(string);
   if (fact != NULL) {
     listFact = addFact(listFact, fact);
@@ -81,7 +83,7 @@ void evalSerie(Rule *list, int idPlayer, char grid[NB_COLUMN][NB_ROW], int row, 
     (*serie)++;
   }
   // Si il n'y a pas de Gain et que la couleur precedente est differente de la couleur actuel alors changement de couleur
-  else if ((row-moveR) >= 0 && (column-moveC) >= 0 && (row - moveR) < NB_ROW && (column - moveC) < NB_COLUMN && convColorToValue(grid[column-moveC][row-moveR]) != convColorToValue(grid[column][row]) && grid[column][row] != EMPTY) {
+  else if ((row-moveR) >= 0 && (column-moveC) >= 0 && convColorToValue(grid[column-moveC][row-moveR]) != convColorToValue(grid[column][row]) && grid[column][row] != EMPTY) {
     //detection changement de couleur
     *result = 0;
     *serie = 0;
@@ -385,7 +387,7 @@ float evalGrid(Rule *list, char grid[NB_COLUMN][NB_ROW]) {
 return maxValue;
 }
 
-float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha, float beta, int profondeur, int height, int increment, int nbMove) {
+float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha, float beta, int profondeur, int height, int increment) {
     int start = 0;
 // On verifie si le joueur ou l'IA a gagne
   for(int idPlayer = PLAYER; idPlayer <= IA; idPlayer++) {
@@ -410,11 +412,8 @@ float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha,
     }
 
 
-  // On simule les coups
   for (int column = start; column < NB_COLUMN && column >= 0; column+=increment) {
     float score = 0;
-
-    // On verifie si le coup est jouable
     if(checkMove(grid, column+1) == FALSE) {
       continue;
     }
@@ -428,10 +427,9 @@ float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha,
     // On joue le coup
     play(player, grid, column+1);
 
-    // On relance avec une profondeur de moins
-    score = -negamax(list, grid, (player == IA) ? PLAYER : IA, -beta, -alpha, profondeur-1, height-1, increment, nbMove);
+    play(player, grid, column+1);
+    score = -negamax(list, grid, (player == IA) ? PLAYER : IA, -beta, -alpha, profondeur-1, height-1, increment);
     displayGrid(grid);
-    // On sauvegarde le meilleur score
     if (score > alpha) {
       alpha = score;
     }
@@ -443,12 +441,13 @@ float negamax(Rule *list, char grid[NB_COLUMN][NB_ROW], int player, float alpha,
     if (alpha >= beta) {
       return alpha;
     }
+
   }
 
   return alpha;
 }
 
-int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) {
+int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW]) {
 
   int col = 0;
   float bestScore = -1000000;
@@ -456,7 +455,7 @@ int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) 
 
   INFO("JOUEUR: IA - Je reflechis ...");
 
-  //--------------------------------------------------------------
+//--------------------------------------------------------------
     Rule *list2 = NULL;
     Hypothesis *listFact = NULL, *fact = NULL;
 
@@ -479,15 +478,6 @@ int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) 
     //--------------------------------------------------------
 
   // Simulation des coups
-  if (nbMove == (NB_COLUMN*NB_ROW)-1) {
-    for (int column = 0; column < NB_COLUMN; column++) {
-      if (checkMove(grid, column + 1) == FALSE) {
-        continue;
-      }
-      col = column+1;
-      break;
-    }
-  } else if(col == 0) {
   for (int column = 0; column < NB_COLUMN; column++) {
 
     // On verifie si le coup est jouable
@@ -498,7 +488,7 @@ int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) 
     // On joue le coup
     play(IA, grid, column+1);
     // On recupere le score de l'algo de decision
-    float score = negamax(list, grid, PLAYER, -1000000, 1000000, levelIA, 2, 1, nbMove);
+    float score = negamax(list, grid, PLAYER, -1000000, 1000000, 6, 2);
     // On annule le coup
     cancelMove(grid, column+1);
 
@@ -507,9 +497,26 @@ int playerIA(Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove, int levelIA) 
       bestScore = score;
       // On ajoute 1 a la colonne car les fonctions se base sur un numero de colonne de 1 a 7
       col = column+1;
+      break;
     }
-  }
-}
+  } else if(col == 0) {
+        for (int column = 0; column < NB_COLUMN; column++) {
+            if (checkMove(grid, column + 1) == FALSE) {
+                continue;
+            }
+
+            play(IA, grid, column + 1);
+            float score = negamax(list, grid, PLAYER, -1000000, 1000000, 6, 2, 1);
+            cancelMove(grid, column + 1);
+
+            //INFO("Score : %f pour la colonne %d", score, column+1);
+
+            if (bestScore < score) {
+                bestScore = score;
+                col = column + 1;
+            }
+        }
+    }
 
   INFO("JOUEUR: IA - quelle column voulez vous jouer? %d", col);
 
