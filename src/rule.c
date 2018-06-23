@@ -18,7 +18,12 @@ Rule * initRules(char *path) {
 
   if (file != NULL) {
     while (fgets(string, MAX_SIZE_RULE, file) != NULL) { // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL)
-      string[strlen(string)-1] = 0; // Suppression du retour chariot
+      if(string[strlen(string)-1]=='\n'){
+        string[strlen(string)-1] = 0; // Suppression du retour chariot
+      }
+      if(string[0]=='#'){
+        continue;
+      }
       DEBUG("%s", string);
       // Decodage de la regle
       rule = decodeRule(string);

@@ -4,3 +4,5 @@ Regle_3 SI Joueur==X ET JoueurGagnant!=X ALORS Partie==0
 Regle_4 SI Player==X ET ColorCase==X ALORS Gain==1
 Regle_5 SI Player==X ET ColorCase==0 ET ColorAdjacente==X ALORS Gain==0.5
 Regle_6 SI Player==X ET ColorCase==-1 ET ColorAdjacente==X ALORS Gain==0.1
+#Desactivée pour performances
+#Regle_7 SI NbToken<<2 ALORS ToPlay==4

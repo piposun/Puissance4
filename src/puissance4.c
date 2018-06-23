@@ -63,10 +63,10 @@ int endGame(Rule *list, int score, int idPlayer, int idHuman) {
   return result;
 }
 
-int player1(char grid[NB_COLUMN][NB_ROW]) {
+int playPlayer(char grid[NB_COLUMN][NB_ROW], int idPlayer) {
   int col = 0;
 
-  INFO("JOUEUR: RED - quelle column voulez vous jouer?");
+  INFO("JOUEUR: %s - quelle column voulez vous jouer?", (idPlayer == PLAYER) ? "RED":"YELLOW");
   scanf("%d", &col);
 
   return col;
@@ -264,20 +264,24 @@ void play(int player, char grid[NB_COLUMN][NB_ROW], int column) {
     return;
   }
 
-  grid[column][freeRow] = (player == IA) ? YELLOW : RED;
+  grid[column][freeRow] = (player == IA || player == PLAYER2) ? YELLOW : RED;
 }
 
-int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW]) {
+int choose(int player, Rule *list, char grid[NB_COLUMN][NB_ROW], int nbMove) {
   int col;
 
   switch (player) {
     case PLAYER:
     {
-      col = player1(grid);
+      col = playPlayer(grid, player);
+    } break;
+    case PLAYER2:
+    {
+      col = playPlayer(grid, player);
     } break;
     case IA:
     {
-      col = playerIA(list, grid);
+      col = playerIA(list, grid, nbMove);
     } break;
     default:
     break;
@@ -301,25 +305,24 @@ int main (int argc, char *argv[]) {
 
   while (end == 0) {
     do {
-      move = choose(player, list, grid);
+      move = choose(player, list, grid,nbMove);
     }while(checkMove(grid, move) == FALSE);
 
     play(player, grid, move);
     displayGrid(grid);
-    evalGrid(list, grid);
 
     nbMove++;
 
-    game = endGame(list, maxToken(player == IA ? YELLOW : RED, grid), player, PLAYER);
+    game = endGame(list, maxToken((player == IA || player == PLAYER2) ? YELLOW : RED, grid), player, PLAYER);
 
-    if (game > 0) {
-      INFO("La partie est GAGNEE en %d coups", nbMove);
-      end = 1;
-    } else if (game < 0) {
+    if (nbMove == NB_COLUMN*NB_ROW) {
+          INFO("Match NUL (%d coups)", nbMove);
+          end = 1;
+      } else if (game < 0) {
       INFO("La partie est PERDUE en %d coups", nbMove);
       end = 1;
-    } else if (nbMove == NB_COLUMN*NB_ROW) {
-      INFO("Match NUL (%d coups)", nbMove);
+    } else if (game > 0) {
+      INFO("La partie est GAGNEE en %d coups", nbMove);
       end = 1;
     }
 
